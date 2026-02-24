@@ -18,7 +18,7 @@ export default function Header({ failures, fetchedAt }: { failures: Failure[]; f
     return () => clearInterval(i);
   }, [fetchedAt]);
 
-  const recentFails = (failures ?? []).filter(f => !f.resolved && new Date(f.created_at) > new Date(Date.now() - 86400000));
+  const recentFails = (failures ?? []).filter(f => new Date(f.created_at) > new Date(Date.now() - 86400000));
   const health = recentFails.length === 0 ? "bg-green-500" : recentFails.length < 3 ? "bg-amber-500" : "bg-red-500";
 
   return (

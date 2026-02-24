@@ -11,7 +11,7 @@ export interface Artifact {
   id: string; run_id: string; task_id: string; type: string; url: string; metadata: Record<string, unknown>; created_at: string;
 }
 export interface Failure {
-  id: string; run_id: string; task_id: string; failure_type: string; error_message: string; raw_error: string; resolved: boolean; created_at: string;
+  id: string; run_id: string | null; task_id: string | null; failure_type: string; error_message: string | null; root_cause: string | null; next_action: string | null; created_at: string;
 }
 export interface TruthObject {
   id: string; category: string; key: string; value: unknown; source: string | null; valid_from: string; valid_until: string | null; created_at: string; updated_at: string;

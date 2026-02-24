@@ -16,7 +16,7 @@ export default function MetricsBar({ tasks, runs, failures, decisions }: { tasks
       <div className="grid grid-cols-4 gap-2">
         <Metric label="Shipped" value={(tasks ?? []).filter(t => t.status === "completed").length} color="text-green-400" />
         <Metric label="Active Runs" value={(runs ?? []).filter(r => r.status === "running").length} color="text-amber-400" />
-        <Metric label="Open Fails" value={(failures ?? []).filter(f => !f.resolved).length} color="text-red-400" />
+        <Metric label="Failures" value={(failures ?? []).length} color="text-red-400" />
         <Metric label="Decisions" value={(decisions ?? []).length} color="text-purple-400" />
       </div>
     </section>
