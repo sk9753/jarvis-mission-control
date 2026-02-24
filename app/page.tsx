@@ -8,7 +8,6 @@ import SystemHealth from "@/components/SystemHealth";
 import ActivityTimeline from "@/components/ActivityTimeline";
 import DecisionsLog from "@/components/DecisionsLog";
 import FailuresPanel from "@/components/FailuresPanel";
-import SystemHealth from "@/components/SystemHealth";
 import TruthObjects from "@/components/TruthObjects";
 
 const empty: DashboardData = { decisions: [], tasks: [], runs: [], artifacts: [], failures: [], truth_objects: [], fetched_at: "" };
