@@ -1,3 +1,4 @@
+"use client";
 import { Decision, Task, Run } from "@/lib/types";
 import StatusBadge from "./StatusBadge";
 
@@ -12,9 +13,9 @@ const icons: Record<string, string> = { decision: "🎯", task: "📋", run: "�
 
 export default function ActivityTimeline({ decisions, tasks, runs }: { decisions: Decision[]; tasks: Task[]; runs: Run[] }) {
   const events: Event[] = [
-    ...decisions.map(d => ({ type: "decision", title: d.title, status: d.status, time: d.created_at })),
-    ...tasks.map(t => ({ type: "task", title: t.title, status: t.status, time: t.updated_at || t.created_at })),
-    ...runs.map(r => ({ type: "run", title: `Run ${r.id.slice(0, 8)}`, status: r.status, time: r.started_at || r.created_at })),
+    ...(decisions ?? []).map(d => ({ type: "decision", title: d.title, status: d.status, time: d.created_at })),
+    ...(tasks ?? []).map(t => ({ type: "task", title: t.title, status: t.status, time: t.updated_at || t.created_at })),
+    ...(runs ?? []).map(r => ({ type: "run", title: `Run ${r.id.slice(0, 8)}`, status: r.status, time: r.started_at || r.created_at })),
   ].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime()).slice(0, 20);
 
   return (
@@ -26,7 +27,7 @@ export default function ActivityTimeline({ decisions, tasks, runs }: { decisions
             <span className="text-sm">{icons[e.type] ?? "•"}</span>
             <span className="text-xs font-medium flex-1 truncate">{e.title}</span>
             <StatusBadge status={e.status} />
-            <span className="text-[10px] text-[#888] whitespace-nowrap">{timeAgo(e.time)}</span>
+            <span className="text-[10px] text-[#888] whitespace-nowrap" suppressHydrationWarning>{timeAgo(e.time)}</span>
           </div>
         ))}
         {events.length === 0 && <p className="text-xs text-[#555]">No activity yet</p>}

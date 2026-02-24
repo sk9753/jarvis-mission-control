@@ -1,3 +1,4 @@
+"use client";
 import { Task } from "@/lib/types";
 import StatusBadge from "./StatusBadge";
 
@@ -14,12 +15,13 @@ const lanes = [
 ];
 
 export default function PipelineStatus({ tasks }: { tasks: Task[] }) {
+  const safeTasks = tasks ?? [];
   return (
     <section className="px-4 py-4">
       <h2 className="text-sm font-semibold text-[#888] uppercase tracking-wider mb-3">Pipeline</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {lanes.map(lane => {
-          const items = tasks.filter(t => t.status === lane.key);
+          const items = safeTasks.filter(t => t.status === lane.key);
           return (
             <div key={lane.key} className={`bg-[#1a1a1a] border ${lane.border} rounded-xl p-3`}>
               <div className="text-xs text-[#888] mb-2">{lane.label} <span className="text-[#e8e8e8] font-semibold">{items.length}</span></div>
@@ -28,8 +30,8 @@ export default function PipelineStatus({ tasks }: { tasks: Task[] }) {
                   <div key={t.id} className="bg-[#141414] rounded-lg p-2">
                     <p className="text-xs font-medium truncate">{t.title}</p>
                     <div className="flex items-center gap-1 mt-1">
-                      <StatusBadge status={t.priority} />
-                      <span className="text-[10px] text-[#888]">{timeAgo(t.created_at)}</span>
+                      {t.priority && <StatusBadge status={t.priority} />}
+                      <span className="text-[10px] text-[#888]" suppressHydrationWarning>{timeAgo(t.created_at)}</span>
                     </div>
                   </div>
                 ))}

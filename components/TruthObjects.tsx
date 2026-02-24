@@ -1,7 +1,9 @@
+"use client";
 import { TruthObject } from "@/lib/types";
 
 export default function TruthObjects({ truths }: { truths: TruthObject[] }) {
-  const grouped = truths.reduce<Record<string, TruthObject[]>>((acc, t) => {
+  const safeTruths = truths ?? [];
+  const grouped = safeTruths.reduce<Record<string, TruthObject[]>>((acc, t) => {
     (acc[t.category] ??= []).push(t);
     return acc;
   }, {});
