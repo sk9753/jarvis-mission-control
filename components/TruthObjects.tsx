@@ -1,6 +1,12 @@
 "use client";
 import { TruthObject } from "@/lib/types";
 
+function displayValue(v: unknown): string {
+  if (v === null || v === undefined) return "—";
+  if (typeof v === "object") return JSON.stringify(v);
+  return String(v);
+}
+
 export default function TruthObjects({ truths }: { truths: TruthObject[] }) {
   const safeTruths = truths ?? [];
   const grouped = safeTruths.reduce<Record<string, TruthObject[]>>((acc, t) => {
@@ -21,7 +27,7 @@ export default function TruthObjects({ truths }: { truths: TruthObject[] }) {
               {items.map(t => (
                 <div key={t.id} className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg px-3 py-2 flex items-center gap-2">
                   <span className="text-[11px] text-[#888] font-mono">{t.key}</span>
-                  <span className="text-[11px] text-[#e8e8e8] flex-1 truncate">{t.value}</span>
+                  <span className="text-[11px] text-[#e8e8e8] flex-1 truncate">{displayValue(t.value)}</span>
                 </div>
               ))}
             </div>

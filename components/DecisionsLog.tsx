@@ -9,7 +9,7 @@ export default function DecisionsLog({ decisions }: { decisions: Decision[] }) {
     <section className="px-4 py-4">
       <h2 className="text-sm font-semibold text-[#888] uppercase tracking-wider mb-3">Decisions</h2>
       <div className="space-y-2">
-        {decisions.slice(0, 10).map(d => (
+        {(decisions ?? []).slice(0, 10).map(d => (
           <div key={d.id} className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl p-3 cursor-pointer" onClick={() => setExpanded(expanded === d.id ? null : d.id)}>
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium flex-1 truncate">{d.title}</span>
@@ -23,7 +23,7 @@ export default function DecisionsLog({ decisions }: { decisions: Decision[] }) {
             )}
           </div>
         ))}
-        {decisions.length === 0 && <p className="text-xs text-[#555]">No decisions yet</p>}
+        {(decisions ?? []).length === 0 && <p className="text-xs text-[#555]">No decisions yet</p>}
       </div>
     </section>
   );
