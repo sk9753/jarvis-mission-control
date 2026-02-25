@@ -2,7 +2,7 @@ export interface Decision {
   id: string; title: string; context: string; outcome: string; status: string; created_at: string; updated_at: string;
 }
 export interface Task {
-  id: string; title: string; description: string; status: string; priority: string; project_id: string; lane_id: string; assigned_to: string; created_at: string; updated_at: string;
+  id: string; title: string; description: string; status: string; priority: string; repo: string; assigned_to: string; created_at: string; updated_at: string;
 }
 export interface Run {
   id: string; task_id: string; status: string; started_at: string; completed_at: string; evidence: Record<string, unknown>; cost_usd: number; model: string; created_at: string;

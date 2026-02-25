@@ -2,6 +2,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { DashboardData } from "@/lib/types";
 import Header from "@/components/Header";
+import TabNav from "@/components/TabNav";
 import PipelineStatus from "@/components/PipelineStatus";
 import MetricsBar from "@/components/MetricsBar";
 import SystemHealth from "@/components/SystemHealth";
@@ -29,6 +30,7 @@ export default function Dashboard() {
   return (
     <main className="max-w-3xl mx-auto pb-8">
       <Header failures={data.failures} fetchedAt={data.fetched_at} />
+      <TabNav />
       {error && (
         <div className="mx-4 mt-4 bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 text-xs text-amber-400">
           ⚠ Unable to fetch data. Check Supabase configuration.
